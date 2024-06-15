@@ -2,7 +2,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import React, { useContext } from 'react';
 import Login from './Auth/Login';
 import { AuthContext } from './Context/AuthContext';
-import Hello from '../app/home/Hello';
+import HomePage from './home/HomePage';
 
 export default function AppNavigation() {
   const { userToken,isLoading} = useContext(AuthContext);
@@ -16,7 +16,7 @@ export default function AppNavigation() {
     }
   return (
     <View style={styles.container}>
-      {userToken ? <Hello /> : <Login />}
+      {userToken ? <HomePage /> : <Login />}
     </View>
   );
 }

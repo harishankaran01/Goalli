@@ -44,7 +44,7 @@ const toastConfig = {
       showToast("Please fill all the fields");
     }
     else{
-      LogIn();
+      LogIn(userName);
     }
   }
 

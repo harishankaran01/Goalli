@@ -3,6 +3,7 @@ export const theme = {
         primary: '#F1D302',
         secondary: '#483C46',
         third: '#FF521B',
+        neutral: (opacity) => `rgba(10, 10, 10, ${ opacity })`,
     },
     fontWeights: {
         medium: '500',
