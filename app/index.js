@@ -152,10 +152,12 @@ import Login from './Auth/Login'
 import { AuthProvider } from './Context/AuthContext'
 
 import AppNavigation from './AppNavigation';
+import { StatusBar } from 'expo-status-bar';
 export default function index() {
 
   return (
     <AuthProvider>
+      <StatusBar style='dark'/>
       <AppNavigation/>
     </AuthProvider>
   )

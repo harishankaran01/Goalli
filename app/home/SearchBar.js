@@ -1,19 +1,34 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { TextInput } from 'react-native-gesture-handler'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
+import React, { useState, useRef } from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 import { hp, wp } from '../../theme/common';
-export default function SearchBar() {
-  return (
-    <View style={styles.container}>
 
-    <View style={styles.searchBar}>
-        <TextInput style={styles.input} placeholder='Search for a Turf Place'/>
-        <FontAwesome name="search" size={24} color="red" />
-    </View>
-    </View>
-  )
+export default function SearchBar() {
+    const [searchText, setSearchText] = useState("");
+    const inputRef = useRef(null);
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.searchBar}>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Search for a Turf Place'
+                    value={searchText}
+                    onChangeText={setSearchText}
+                    ref={inputRef}
+                />
+                <FontAwesome
+                    name="search"
+                    size={24}
+                    onPress={() => { inputRef.current.focus() }}
+                    color="red"
+                    style={styles.icon}
+                />
+            </View>
+        </View>
+    )
 }
+
 
 const styles = StyleSheet.create({
     container:{
@@ -46,6 +61,6 @@ const styles = StyleSheet.create({
     },
     icon: {
         fontSize: 24,
-        color: '#424242',
+        paddingHorizontal:10
     },
 })

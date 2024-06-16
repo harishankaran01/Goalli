@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     const userTokeN= await AsyncStorage.getItem("userToken");
     const userNAme= await AsyncStorage.getItem("userName");
-    console.log(userNAme);
     setUserToken(userTokeN);
     setUserName(userNAme);
     setIsLoading(false);
