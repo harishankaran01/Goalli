@@ -7,8 +7,8 @@ import data from '../../theme/data';
 export default function Categories({activeCategory,handleActiveCategoryChange}) {
     let Category=data.map((category)=>{
         isActive= activeCategory==category;
-        let color = isActive ? "black" :"black";
-        let backgroundColor = isActive ? "blue": "white";
+        let color = isActive ? "#fff" :"black";
+        let backgroundColor = isActive ? "#038bff": "white";
         return(
             <Pressable onPress={()=>handleActiveCategoryChange(activeCategory==category ? null : category)}  style={[styles.category,{backgroundColor}]} key={category} >
                 <Text style={[styles.categoryTitle,{color}]}>{category}</Text>

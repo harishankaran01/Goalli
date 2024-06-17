@@ -1,5 +1,5 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AuthContext } from '../Context/AuthContext';
 import { Entypo } from '@expo/vector-icons';
@@ -7,12 +7,25 @@ import { theme } from '../../theme/color';
 import SearchBar from './SearchBar';
 import Categories from './Categories';
 import Turf from './Turf';
+import Profile from './Profile';
+import { router, useNavigation } from 'expo-router';
 
 export default function HomePage() {
     const { top } = useSafeAreaInsets();
+    const navigation=useNavigation();
     const paddingTop = top > 30 ? top + 10 : 30;
     const { LogIn, LogOut, isLoading, userName } = useContext(AuthContext);
     const [activeCategory, setActiveCategory] = useState("");
+    const profileRef=useRef(null);
+    const [isLogOut,setIsLogout]=useState(false);
+    isLogOut ? LogOut(): null;
+    const handleProfileOpen=()=>{
+        profileRef?.current?.present();
+        
+    }
+    const handleProfileClose=()=>{
+        profileRef?.current?.close();
+    }
    
     const handleActiveCategoryChange = (category) => {
         setActiveCategory(category);
@@ -30,20 +43,23 @@ export default function HomePage() {
                         <Text style={styles.headDescription}>Explore the world</Text>
                     </View>
                 </View>
-                <View>
-                    <Entypo name="menu" size={40} color="black" onPress={() => LogOut()} />
-                </View>
+                <Pressable onPress={()=> navigation.navigate("home/ProfileDetails",{
+                     userName
+                }, LogOut )}>
+                    <Entypo name="menu" size={40} color="black" />
+                </Pressable>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
 
            
             <SearchBar />
-            <Categories handleActiveCategoryChange={handleActiveCategoryChange} activeCategory={activeCategory} />
+            <Categories  handleActiveCategoryChange={handleActiveCategoryChange} activeCategory={activeCategory} />
            <View style={styles.turfPlace}>
-            <Text style={styles.PlaceText}>Find Available slots for you</Text>
-            <Turf/>
+            <Text  style={styles.PlaceText}>Find Available slots for you</Text>
+            <Turf userName={userName}/>
            </View>
            </ScrollView>
+           <Profile profileRef={profileRef} handleProfileClose={handleProfileClose}/>
         </View>
     );
 }

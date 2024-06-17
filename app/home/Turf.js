@@ -1,15 +1,17 @@
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, ImageBackground, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import APIData from './APIData'
 import { wp,hp } from '../../theme/common'
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-export default function Turf() {
+import { useNavigation } from 'expo-router';
+export default function Turf({userName}) {
+  let navigation=useNavigation();
     let turfPlace=APIData.map((place)=>{
         return(
-          <View key={place.id} style={styles.imageContainer}>
+          <Pressable onPress={()=>navigation.navigate("Places/Products",{id:place.id,userName})} key={place.id} style={styles.imageContainer}>
           <Image
-            source={require("../../assets/Icons/TurfWar.png")}
+            source={require("../../assets/Icons/Turf_Replace.avif")}
             resizeMode="cover"
             style={styles.image}
           />
@@ -25,7 +27,7 @@ export default function Turf() {
             </View>
           
           </View>
-        </View>
+        </Pressable>
     
         )
     })
